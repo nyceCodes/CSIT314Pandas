@@ -25,20 +25,30 @@ class ConfirmedMatchEntity:
         return matches
 
     def search_matches(self, user_id, keyword, role='cleaner'):
-        conn = get_connection(); cur = conn.cursor(dictionary=True)
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+        
         if role == 'cleaner':
             cur.execute("""
-                SELECT cm.*, up.name AS home_owner_name
+                SELECT cm.*, up.name AS client_name
                 FROM confirmed_matches cm
-                LEFT JOIN user_profiles up ON cm.home_owner_id = up.id
-                WHERE cm.cleaner_id = %s AND cm.service_name LIKE %s
-            """, (user_id, f"%{keyword}%",))
+                JOIN user_profiles up ON cm.home_owner_id = up.id
+                WHERE cm.cleaner_id = %s AND (
+                    cm.service_name LIKE %s OR up.name LIKE %s
+                )
+            """, (user_id, f"%{keyword}%", f"%{keyword}%"))
         else:
             cur.execute("""
                 SELECT cm.*, up.name AS cleaner_name
                 FROM confirmed_matches cm
                 LEFT JOIN user_profiles up ON cm.cleaner_id = up.id
-                WHERE cm.home_owner_id = %s AND cm.service_name LIKE %s
-            """, (user_id, f"%{keyword}%",))
-        results = cur.fetchall(); cur.close(); conn.close()
+                WHERE cm.home_owner_id = %s AND (
+                    cm.service_name LIKE %s OR up.name LIKE %s
+                )
+            """, (user_id, f"%{keyword}%", f"%{keyword}%"))
+
+        results = cur.fetchall()
+        cur.close()
+        conn.close()
         return results
+
