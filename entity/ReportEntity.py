@@ -2,13 +2,14 @@ from db import get_connection
 from datetime import date, timedelta
 
 class ReportEntity:
-    def log_action(self, user_id, action):
+    def log_action(self, user_id, action, cleaner_id=None, home_owner_id=None, service_name=None, location=None):
         conn = get_connection()
         cur = conn.cursor()
         cur.execute("""
-            INSERT INTO activity_logs (user_id, action) 
-            VALUES (%s, %s)
-        """, (user_id, action))
+            INSERT INTO activity_logs 
+            (user_id, action, cleaner_id, home_owner_id, cleaningServiceName, location, timestamp)
+            VALUES (%s, %s, %s, %s, %s, %s, NOW())
+        """, (user_id, action, cleaner_id, home_owner_id, service_name, location))
         conn.commit()
         cur.close()
         conn.close()

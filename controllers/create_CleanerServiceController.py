@@ -21,8 +21,13 @@ class CreateCleanerServiceController:
                 cleaner_id, name, description, price,
                 category_id, date_available, location
             )
-            ReportEntity().log_action(cleaner_id, 'Created new service')
-
+            ReportEntity().log_action(
+                user_id=cleaner_id,
+                action=f'Created service "{name}" at {location}',
+                cleaner_id=cleaner_id,
+                service_name=name,
+                location=location
+            )
 
             flash("Service created successfully!!")
             return redirect(url_for('view_services'))

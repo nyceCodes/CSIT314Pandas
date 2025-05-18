@@ -1,6 +1,7 @@
-from flask import request, redirect, url_for, flash, render_template
+from flask import request, redirect, url_for, flash, render_template, session
 from entity.CleanerServiceEntity import CleanerServiceEntity
 from entity.ServiceCategoryEntity import ServiceCategoryEntity
+from entity.ReportEntity import ReportEntity
 
 class UpdateCleaningServiceController:
     def update(self, service_id):
@@ -20,9 +21,16 @@ class UpdateCleaningServiceController:
             date_available = request.form['date_available']
             location = request.form['location']
             entity.update_service(service_id, name, description, price, category_id, date_available, location)
+            ReportEntity().log_action(
+                user_id=session['user_id'],
+                action=f'Updated service "{name}" at {location}',
+                cleaner_id=session['user_id'],
+                service_name=name,
+                location=location
+            )
             flash("Service updated.")
             return redirect(url_for('view_services'))
-
+        
         return render_template('cleaner_service_form.html', service=service, categories=categories)
 
 def register_update_cleaning_service_route(app):
