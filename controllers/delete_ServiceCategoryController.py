@@ -3,8 +3,11 @@ from entity.ServiceCategoryEntity import ServiceCategoryEntity
 
 class DeleteServiceCategoryController:
     def delete(self, category_id):
-        ServiceCategoryEntity().delete_category(category_id)
-        flash("Category deleted.")
+        try:
+            ServiceCategoryEntity().delete_category(category_id)
+            flash("Category deleted.")
+        except Exception as e:
+            flash(str(e))
         return redirect(url_for('view_service_categories'))
 
 def register_delete_service_category_route(app):

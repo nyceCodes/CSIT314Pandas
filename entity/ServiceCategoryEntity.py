@@ -25,6 +25,14 @@ class ServiceCategoryEntity:
 
     def delete_category(self, category_id):
         conn = get_connection(); cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM cleaningservices WHERE category_id = %s", (category_id,))
+        count = cur.fetchone()[0]
+
+        if count > 0:
+            cur.close(); conn.close()
+            raise Exception("Cannot delete category. It is currently in use by one or more cleaning services.")
+        
+        # Safe to delete
         cur.execute("DELETE FROM service_categories WHERE id = %s", (category_id,))
         conn.commit(); cur.close(); conn.close()
 
