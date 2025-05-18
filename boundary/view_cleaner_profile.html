@@ -21,7 +21,7 @@
     <ul class="list-group mb-4">
       {% for s in services %}
       <li class="list-group-item">
-        <strong>{{ s.cleaningServiceName }}</strong> — ₱{{ s.cleaningServicePrice }}<br>
+        <strong>{{ s.cleaningServiceName }}</strong> — ${{ s.cleaningServicePrice }}<br>
         {{ s.cleaningServiceDescription }}<br>
         <small class="text-muted">Available: {{ s.date_available }} | Location: {{ s.location }}</small>
       </li>
