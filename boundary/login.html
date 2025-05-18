@@ -113,14 +113,17 @@
                 </select>
             </div>
             
-            <button type="submit">Login</button>
-            
-            <div class="forgot-password">
-                <a href="/forgot-password">Forgot password?</a>
-            </div>
-            <div class="text-center mt-3">
-                <a href="{{ url_for('home') }}" class="btn btn-outline-secondary" style="margin-top: 10px;">← Back to Home</a>
-            </div>
+        <button type="submit" style="background-color: #007bff; color: white; 
+                border: none; padding: 12px 20px; width: 100%; border-radius: 4px; 
+                font-size: 16px; margin-bottom: 15px;">
+            Login
+        </button>
+
+        <a href="{{ url_for('home') }}" 
+        style="display: block; text-align: center; background-color: #007bff; color: white; 
+                padding: 12px 20px; border-radius: 4px; text-decoration: none; font-size: 16px;">
+            ← Back to Home
+        </a>
         </form>
     </div>
     <script>
