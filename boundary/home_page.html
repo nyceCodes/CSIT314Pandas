@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PandaClean - Freelance Home Cleaners Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1600585152220-90363fe7e115');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 30px;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0d6efd;
+        }
+        .user-type-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .user-type-card:hover {
+            transform: translateY(-10px);
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">PandaClean</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('find_cleaners') }}">Find Cleaners</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('how_it_works') }}">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('pricing') }}">Pricing</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="{{ url_for('login') }}" class="btn btn-outline-light me-2">Login</a>
+                    <a href="{{ url_for('signup') }}" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Find Trusted Home Cleaners Near You</h1>
+            <p class="lead">Connect directly with freelance cleaning professionals for your home needs</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container mb-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature-icon">
+                    <i class="bi bi-search"></i>
+                </div>
+                <h3>Find Cleaners</h3>
+                <p>Browse profiles, read reviews, and compare prices to find the perfect cleaner for your needs.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-icon">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+                <h3>Book Instantly</h3>
+                <p>See real-time availability and book cleaning services at your convenience.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h3>Safe & Secure</h3>
+                <p>All cleaners are vetted and our secure payment system protects both parties.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Type Sections -->
+    <section class="container mb-5">
+        <h2 class="text-center mb-4">How PandaClean Works For You</h2>
+        <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card user-type-card">
+            <div class="card-body text-center">
+                <h3 class="card-title">For Home Owners</h3>
+                <ol class="text-start">
+                <li>Search for cleaners in your area</li>
+                <li>Compare profiles and prices</li>
+                <li>Book and pay securely</li>
+                <li>Receive quality cleaning service</li>
+                </ol>
+                <a href="{{ url_for('login') }}" class="btn btn-primary mt-3">Login as Home Owner</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card user-type-card">
+            <div class="card-body text-center">
+                <h3 class="card-title">For Cleaners</h3>
+                <ol class="text-start">
+                <li>Create your professional profile</li>
+                <li>Set your availability and rates</li>
+                <li>Get matched with clients</li>
+                <li>Grow your cleaning business</li>
+                </ol>
+                <a href="{{ url_for('login') }}" class="btn btn-primary mt-3">Login as Cleaner</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card user-type-card">
+            <div class="card-body text-center">
+                <h3 class="card-title">For Admins</h3>
+                <ol class="text-start">
+                <li>Manage user accounts</li>
+                <li>Monitor platform activity</li>
+                <li>Generate reports</li>
+                <li>Maintain service categories</li>
+                </ol>
+                <a href="{{ url_for('login') }}" class="btn btn-primary mt-3">Login as Admin</a>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+        <h2 class="mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">Join thousands of happy home owners and professional cleaners</p>
+        <a href="{{ url_for('signup') }}" class="btn btn-light btn-lg me-2">Sign Up as Home Owner</a>
+        <a href="{{ url_for('signup') }}" class="btn btn-outline-light btn-lg">Become a Cleaner</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5>PandaClean&nbsp;</h5>
+                    <p>Connecting home owners with trusted freelance cleaning professionals since 2025.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('home') }}" class="text-decoration-none">Home</a></li>
+                        <li><a href="{{ url_for('find_cleaners') }}" class="btn btn-primary mt-3">Find a Cleaner</a></li>
+                        <li><a href="{{ url_for('how_it_works') }}" class="text-decoration-none">How It Works</a></li>
+                        <li><a href="{{ url_for('pricing') }}" class="text-decoration-none">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Email: support@pandaclean.com</li>
+                        <li>Phone: +1 234 567 890</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none">Facebook</a></li>
+                        <li><a href="#" class="text-decoration-none">Twitter</a></li>
+                        <li><a href="#" class="text-decoration-none">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

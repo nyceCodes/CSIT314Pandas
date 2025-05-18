@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Shortlist | PandaClean</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <h2 class="mb-4">My Shortlisted Cleaners</h2>
+
+    <!-- Search Form -->
+    <form action="{{ url_for('search_shortlist') }}" method="get" class="mb-4 d-flex">
+        <input type="text" name="q" class="form-control me-2" placeholder="Search by name or service type">
+        <button type="submit" class="btn btn-outline-primary">Search</button>
+    </form>
+
+    {% if shortlist %}
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Service Type</th>
+                        <th>Location</th>
+                        <th>Added At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cleaner in shortlist %}
+                    <tr>
+                        <td>{{ cleaner.cleaner_name }}</td>
+                        <td>{{ cleaner.service_type or '—' }}</td>
+                        <td>{{ cleaner.service_location or '—' }}</td>
+                        <td>{{ cleaner.added_at }}</td>
+                        <td>
+                            <a href="{{ url_for('view_cleaner_profile', cleaner_id=cleaner.cleaner_id) }}" class="btn btn-sm btn-outline-info">View Profile</a>
+                            <!-- Optional remove button -->
+                            <!-- <a href="#" class="btn btn-sm btn-outline-danger">Remove</a> -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-muted">You haven't shortlisted any cleaners yet.</p>
+    {% endif %}
+
+    <a href="{{ url_for('homeowner_dashboard') }}" class="btn btn-secondary mt-4">← Back to Dashboard</a>
+
+</body>
+</html>

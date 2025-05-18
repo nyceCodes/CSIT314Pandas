@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profiles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h2>User Profiles</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for profile in profiles %}
+            <tr>
+                <td>{{ profile.id }}</td>
+                <td>{{ profile.name }}</td>
+                <td>{{ profile.email }}</td>
+                <td>{{ profile.dob }}</td>
+                <td>{{ profile.role }}</td>
+                <td>
+                {% if profile.status == 1 or profile.status == 'active' %}
+                    Active
+                {% else %}
+                    Suspended
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('update_user_profile', profile_id=profile.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{{ url_for('suspend_user_profile', profile_id=profile.id) }}" class="btn btn-sm btn-danger">Suspend</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Back button -->
+    <div class="mt-4">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">← Back to Admin Dashboard</a>
+    </div>
+</body>
+</html>

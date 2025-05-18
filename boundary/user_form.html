@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if user %}Edit{% else %}Create{% endif %} User Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Cambria, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h3 class="text-center mb-4">{% if user %}Edit{% else %}Create{% endif %} User Account</h3>
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" value="{{ user.username if user else '' }}" class="form-control" required>
+        </div>
+
+        {% if not user %}
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select name="role" class="form-select" required>
+                <option value="cleaner" {% if user and user.role == 'cleaner' %}selected{% endif %}>Cleaner</option>
+                <option value="home_owner" {% if user and user.role == 'home_owner' %}selected{% endif %}>Home Owner</option>
+                <option value="user_admin" {% if user and user.role == 'user_admin' %}selected{% endif %}>User Admin</option>
+                <option value="platform_manager" {% if user and user.role == 'platform_manager' %}selected{% endif %}>Platform Manager</option>
+            </select>
+        </div>
+
+        {% if user %}
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select" required>
+                <option value="active" {% if user.status == 'active' %}selected{% endif %}>Active</option>
+                <option value="suspended" {% if user.status == 'suspended' %}selected{% endif %}>Suspended</option>
+            </select>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary w-100">Save</button>
+        <a href="{{ url_for('view_user_accounts') }}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
