@@ -4,7 +4,6 @@ class LogoutController:
     def logout(self):
         role = session.get('role')
         session.clear()
-        flash("You have been logged out.")
 
         if role == 'cleaner':
             return redirect(url_for('login_cleaner'))
@@ -14,7 +13,7 @@ class LogoutController:
             return redirect(url_for('login_home_owner'))
         elif role == 'platform_manager':
             return redirect(url_for('login_platform_manager'))
-
+        flash("You have been logged out.")
         return redirect(url_for('home'))
 
 def register_logout_route(app):

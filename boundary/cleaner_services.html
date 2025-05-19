@@ -7,7 +7,16 @@
 </head>
 <body class="container mt-5">
   <h2 class="mb-4">My Cleaning Services</h2>
-
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
   <div class="mb-3 d-flex justify-content-between">
     <form class="d-flex" action="{{ url_for('search_service') }}" method="get">
       <input type="text" name="q" class="form-control me-2" placeholder="Search services">

@@ -60,6 +60,16 @@
       <!-- Main Content -->
     <div class="col-md-9 col-lg-10 p-4">
       <h2 class="mb-4">Cleaner Dashboard</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show mt-3" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
 
       <div class="row g-4 text-center mb-4">
         <div class="col-md-4">
