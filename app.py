@@ -179,18 +179,6 @@ def platform_management_dashboard():
 
 # - - - - - - -
 
-# Reports (Platform Management)
-@app.route('/report_daily')
-def report_daily():
-    return render_template('report_daily.html')
-
-@app.route('/report_weekly')
-def report_weekly():
-    return render_template('report_weekly.html')
-
-@app.route('/report_monthly')
-def report_monthly():
-    return render_template('report_monthly.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
